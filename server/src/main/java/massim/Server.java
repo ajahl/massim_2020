@@ -28,6 +28,8 @@ import java.util.stream.IntStream;
  */
 public class Server {
 
+    public static final String EOM = "\u0004";
+
     private ServerConfig config;
 
     private final InputManager inputManager = new InputManager();

@@ -91,7 +91,8 @@ class FrontDesk {
         try {
             var out = s.getOutputStream();
             out.write(msg.toJson().toString().getBytes());
-            out.write(0);
+//            out.write(0);
+            out.write(Server.EOM.getBytes());
         } catch (IOException e) {
             Log.log(Log.Level.CRITICAL, msg.getMessageType() + " message could not be sent.");
             e.printStackTrace();
@@ -106,15 +107,25 @@ class FrontDesk {
         try {
             InputStream is = s.getInputStream();
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            int b;
+            int b = -1;
             while (true) {
+                if (buffer.toString().endsWith(Server.EOM)) {
+                    break;
+                }
+                System.out.println( buffer);
                 b = is.read();
-                if (b == 0) break; // message completely read
-                else if (b == -1) return; // stream ended
-                else buffer.write(b);
+                System.out.println(b + " " + (char)b);
+                if (b == 0)
+                    break; // message completely read
+                else if (b == -1)
+                    return; // stream ended
+                else
+                    buffer.write(b);
             }
 
             String received = buffer.toString(StandardCharsets.UTF_8);
+//            String received = buffer.toString(StandardCharsets.UTF_8).substring(0, buffer.toString(StandardCharsets.UTF_8).indexOf(Server.$_EOM_$));
+            System.out.println(received);
             JSONObject json = null;
             try {
                 json = new JSONObject(received);
