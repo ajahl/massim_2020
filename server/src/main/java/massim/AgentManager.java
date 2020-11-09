@@ -240,8 +240,8 @@ class AgentManager {
                 while (!disconnecting){
                     var b = in.read();
                     if (!skipping && b != 0) buffer.write(b);
-                    if(b == -1) break; // stream ended
-                    if (b == 0){
+                    if (b == -1) break; // stream ended
+                    if (b == 0 || buffer.toString().endsWith(Server.EOM)){
                         if (skipping){
                             skipping = false; // new packet next up
                         }
@@ -300,7 +300,9 @@ class AgentManager {
                     var osw = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8);
                     var msg = sendQueue.take();
                     osw.write(msg.toString());
-                    osw.write(0);
+//                    osw.write(0);
+                    osw.write(Server.EOM);
+                    System.out.println(msg.toString() + Server.EOM);
                     osw.flush();
                 } catch (IOException | InterruptedException e){
                     Log.log(Log.Level.DEBUG, name + ": Error writing to socket. Stop sending now.");
