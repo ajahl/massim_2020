@@ -1,6 +1,8 @@
 # simple setup file for testing
 
-add 5 5 taskboard
+add 17 20 taskboard
+add 42 34 dispenser b0
+
 
 stop    # stops further setup execution
 
