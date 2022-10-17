@@ -1,22 +1,19 @@
 {
+   "NOsetup" : "conf/setup/PKVR.txt",
+
     "id": "PKVR-2021",
-    "steps" : 1000,
+    "steps" : 100000,
     "randomSeed" : 17,
     "randomFail" : 1,
+    "entities" : {"standard" : 4},
+    "clusterBounds" : [1,1],
 
     "clearSteps" : 3,
     "clearEnergyCost" : 30,
     "disableDuration" : 4,
     "maxEnergy" : 300,
     "attachLimit" : 10,
-
-    "entities" : {"standard" : 1},
     
-    "clusterBounds" : [1,1],
-
-    "blockTypes" : [1, 1],
-    "dispensers" : [0, 0],
-
     "grid" : {
       "height" : 50,
       "width" :  50,
@@ -29,6 +26,9 @@
         "size" : [2,2]
       }
     },
+    
+    "blockTypes" : [1, 1],
+    "dispensers" : [10, 10],
 
     "tasks" : {
       "size" : [1, 4],
@@ -46,7 +46,5 @@
       "warning" : 5,
       "create" : [-3, 1],
       "perimeter" : 2
-    },
-
-    "setup" : "conf/setup/PKVR.txt"
+    }
 }
